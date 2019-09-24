@@ -1,0 +1,59 @@
+<% include partials/_header %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+          <form action="/edit/<%= task._id %>" method="post">
+            <div class="form-group">
+              <input class="form-control" type="text" name="name" placeholder="name" value="<%= task.name %>">
+            </div>
+
+            <div class="form-group">
+                <select class="form-control type" name="type">
+                  <option disabled selected value> <%= task.type %>  </option>
+                  <option value="Movie">Movie</option>
+                  <option value="Food">Food</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                  <select class="form-control favorite" name="favorite">
+                    <option disabled selected value> <%= task.favorite %>   </option>
+                  </select>
+                </div>
+
+            <button class="btn btn-primary" type="submit">
+              Update 
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+$(".type").on("change", function(){
+  var Type = $(this).val();
+  var options=' <option disabled selected value> select an favorite  </option>';
+  if(Type=="Movie"){
+      options +=  '<option value="Action">Action</option> <option value="Drama">Drama</option>';
+                
+  }else if(Type=="Food"){
+      // console.log(Type)
+      options += '<option value="Chinese">Chinese</option> <option value="Indian">Indian</option>';
+  }
+  $('.favorite').html(options);
+
+});
+
+
+</script>
+
+
+
+<% include partials/_footer%>
